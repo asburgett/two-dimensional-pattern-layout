@@ -39,8 +39,7 @@ class Triangle:
             print("Invalid data in triangle definition")
 
         if self.radians:
-            degrees = [math.degrees(a), math.degrees(b), math.degrees(c)]
-            self.angles = degrees
-            return 1
-        else:
+            self.angles = [math.degrees(a), math.degrees(b), math.degrees(c)]
             return 0
+        else:
+            return 1
