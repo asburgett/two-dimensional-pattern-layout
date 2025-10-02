@@ -1,6 +1,10 @@
 import math
 import turtle
 
+'''
+A triangle is made up of distance measurements
+'''
+
 class Triangle:
     def __init__(self):
         self.angles = []
