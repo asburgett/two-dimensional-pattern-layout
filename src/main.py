@@ -6,38 +6,14 @@ from src.classes.utils.triangle import Triangle
 pattern = (6.5, 6.5, 10.5)
 
 # a triangle is made up of segments and segment lengths, (AB=6.5, BC=6.5, AC=10.5)
-t = Triangle
+# initialize a triangle
+t = Triangle()
 
-# a pattern is made up of one or more triangles
-p = Pattern
+# add a segment
+for segment in pattern:
+    print(segment)
+    t.add_segment(segment)
 
-pattern = {
-    'segments': {
-        '1': {
-            'from': 'a',
-            'to': 'b',
-            'length': 6.5
-        },
-        '2': {
-            'from': 'b',
-            'to': 'c',
-            'length': 6.5
-        },
-        '3': {
-            'from': 'c',
-            'to': 'a',
-            'length': 10.5
-        }
-    }
-}
-
-patterns = [pattern]
-
-# define keys for point names
-keys = ('a', 'b', 'c')
-
-# loop through the patterns
-for data in patterns:
-    for value in data:
-        print(value)
-    #print(data)
+t.calculate_internal_angles(list(pattern))
+print(t.angles)
+quit()
