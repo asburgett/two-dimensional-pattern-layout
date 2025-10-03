@@ -11,6 +11,10 @@ class Triangle:
         self.radians = []
         self.segments = []
 
+    def parse_triangle_data(self, triangle):
+        if type(triangle) is list:
+            print(triangle)
+
     def add_segment_dimension(self, segment_dimension):
         self.segments.append(segment_dimension)
         self.sort_segments()
