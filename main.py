@@ -1,5 +1,7 @@
+from src.classes.utils.graphic import Graphic
 from src.classes.utils.pattern import Pattern
 from src.classes.utils.triangle import Triangle
+
 
 
 # simple example pattern, parameters are segment dimensions of a triangle
@@ -7,6 +9,7 @@ pattern_data = (6.5, 6.5, 10.5)
 
 # a triangle is made up of segments and segment lengths, (AB=6.5, BC=6.5, AC=10.5)
 # initialize a triangle
+g = Graphic()
 t = Triangle()
 p = Pattern()
 
@@ -20,5 +23,7 @@ try:
     print(t.angles)
 except Exception as e:
     print(e)
+
+g.run()
 
 quit()
