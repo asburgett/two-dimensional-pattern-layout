@@ -24,6 +24,6 @@ try:
 except Exception as e:
     print(e)
 
-g.run()
+g.create_sierpinski_triangle()
 
 quit()
