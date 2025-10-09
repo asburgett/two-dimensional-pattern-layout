@@ -10,10 +10,21 @@ class Triangle:
         self.angles = []
         self.radians = []
         self.segments = []
+        #self.segments = {'a-b': 6.5, 'b-c': 6.5, 'c-a': 10.5}
 
     def parse_triangle_data(self, triangle):
+        #TODO: validate the triangle data
         if type(triangle) is list:
             print(triangle)
+        else:
+            print(f"Triangle var type is: {type(triangle)}")
+
+    def parse_pattern_data(self, pattern):
+        #TODO: validate the pattern data
+        if type(pattern) is tuple:
+            print(pattern)
+        else:
+            print(f"Pattern var type is: {type(pattern)}")
 
     def add_segment_dimension(self, segment_dimension):
         self.segments.append(segment_dimension)
