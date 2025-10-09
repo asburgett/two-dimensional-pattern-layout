@@ -4,3 +4,4 @@ Pillow>=11.3.0
 random
 subprocess
 sqlite3
+turtle

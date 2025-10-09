@@ -17,13 +17,14 @@ class Video:
         ffmpeg_command = [
             "C:\\Users\\PC\\Downloads\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffmpeg.exe",
             "-framerate", str(fps),
-            "-i", os.path.join(image_folder, "generated_image_%25d.png"),  # Adjust pattern if needed
-            "-c:v", "h264_nvenc",  # h264, threaded nvidia gpu
-            #"-c:v", "hevc_nvenc",  # gpu, hevc
-            #"-c:v", "libx264",  #std, h264, threaded cpu's
+            "-i", os.path.join(image_folder, "generated_image_%20d.png"),  # Adjust pattern if needed
+            #"-c:v", "h264_nvenc",  # h264, threaded nvidia gpu
+            #"-c:v", "hevc_nvenc",  # nvidia gpu, hevc
+            "-c:v", "libx264",  #std, h264, threaded cpu's
             "-pix_fmt", "yuv420p",
             os.path.join(image_folder, output_video_path)
         ]
+        print(ffmpeg_command)
 
         try:
             subprocess.run(ffmpeg_command, check=True)

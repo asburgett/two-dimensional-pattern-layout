@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw
 from datetime import datetime
 import os
 import random
+import turtle
 
 '''
 A pattern is made up of many triangles
@@ -18,7 +19,7 @@ class Graphic:
 
     def run(self):
         # Create a new blank image (RGB mode, 200x200 pixels, white background)
-        img = Image.new('RGB', (200, 200), color='white')
+        img = Image.new('RGB', (10, 10), color='white')
 
         # Get a drawing object
         draw = ImageDraw.Draw(img)
@@ -35,6 +36,24 @@ class Graphic:
 
         # Save the image
         img.save(output_file)
+
+    def display_pattern(self, pattern_data):
+        # setup the turtle instance, screen dimensions, and pen settings
+        t = turtle.Turtle()
+        screen = turtle.Screen()
+        screen.setup(.33, .33)
+        t.pensize(2)
+        t.pencolor("red")
+
+        if type(pattern_data) is tuple:
+            print(pattern_data)
+
+        t.pendown()
+        t.goto(0, 5)
+        t.goto(5, 5)
+        t.goto(10, 0)
+
+        t.showturtle()
 
     def create_run_id(self):
         self.run_id = int(datetime.now().timestamp())
@@ -73,9 +92,9 @@ class Graphic:
             draw.point((new_location_x, new_location_y), fill='black')
 
             # save the image
-            if self.save_sierpinski_iterations and loops % 50 == 0:
+            if self.save_sierpinski_iterations and loops % 500 == 0:
                 #timestamp = datetime.now().timestamp()
-                output_file = "{}/{}_{}.{}".format(directory, file, str(self.iteration_count-loops).zfill(25), filetype)
+                output_file = "{}/{}_{}.{}".format(directory, file, str(int(self.iteration_count)-int(loops)).zfill(20), filetype)
                 #print(output_file)
                 img.save(output_file)
 
@@ -84,7 +103,7 @@ class Graphic:
 
             # output information at an interval
             if loops % 500 == 0:
-                print(f"Loops completed: {loops}")
+                print(f"Loops completed: {int(loops)}")
 
             # decrement the iteration_count var
             loops -= 1
