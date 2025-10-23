@@ -1,5 +1,8 @@
 from datetime import datetime
 from PIL import Image, ImageDraw
+
+import src
+from src.classes.utils.triangle import Triangle
 from src.config.config import Config
 import os
 import random
@@ -46,7 +49,7 @@ class Graphic:
         # setup the turtle instance, screen dimensions, and pen settings
         t = turtle.Turtle()
         screen = turtle.Screen()
-        screen.setup(.33, .33)
+        screen.setup(.5, .5)
         t.pensize(2)
         t.pencolor("red")
 
@@ -59,15 +62,39 @@ class Graphic:
             # Long segment: (0,0)(10.5,0)
             # Next segment: (10.5,0)(?, ?)
             # Last segment: (10.5,0)(?, ?)
+        elif type(pattern_data) is src.classes.utils.triangle.Triangle:
+            print(pattern_data.angles)
         else:
             print(f"Error with pattern_data var type: {type(pattern_data)}")
 
-        t.pendown()
-        t.goto(0*10, 5*10)
-        t.goto(5*10, 5*10)
-        t.goto(10*10, 0*10)
+        # TODO: update the pattern data with some new information
+        #pattern_data['a']
+        print(f"Pattern data: {pattern_data.heights}")
+        #quit()
 
+        # show the turtle screen
         t.showturtle()
+        scaler = 30
+
+        # goto point A at origin (0,0)
+        t.goto(0, 0)
+        t.setheading(0)
+        t.pendown()
+
+        # go to point C
+        t.goto(pattern_data.segments[2]['length'] * scaler, 0 * scaler)
+
+        t.pencolor("blue")
+
+        # go to point b
+        t.goto(pattern_data.heights[3] * scaler, pattern_data.heights[2] * scaler)
+
+        t.pencolor("black")
+
+        # back to point a, at origin
+        t.goto(0 * scaler, 0 * scaler)
+
+        screen.exitonclick()
 
     def create_run_id(self):
         self.run_id = int(datetime.now().timestamp())
