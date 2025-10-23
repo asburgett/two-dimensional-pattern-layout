@@ -1,28 +1,45 @@
+from src.config.config import Config
 import os
 import subprocess
 
 class Video:
     def __init__(self):
         self.input_folder = ''
-        self.ffmpeg_installation_folder = "C:\\Users\\PC\\Downloads\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffmpeg.exe"
+        # TODO: make the ffmpeg functionality os agnostic (linux, mac, win, etc)
+        #self.ffmpeg_installation = "C:\\Users\\PC\\Downloads\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffmpeg.exe"
+        self.ffmpeg_installation = "C:\\Users\\PC\\Downloads\\ffmpeg-8.0-essentials_build\\bin\\ffmpeg.exe"
+        self.ffmpeg_version = None
 
     def run(self):
         print(f"Input folder: {self.input_folder}")
 
+    def get_ffmpeg_version(self):
+        ffmpeg_command = [
+            self.ffmpeg_installation,
+            "-version"
+        ]
+        try:
+            result = subprocess.run(ffmpeg_command, check=True)
+            self.parse_ffmpeg_version_data(result)
+        except subprocess.CalledProcessError as e:
+            print(e)
+
     def check_for_ffmpeg_installation(self):
-        if os.path.isfile(self.ffmpeg_installation_folder):
-            print(f"FFMPEG installed at: {self.ffmpeg_installation_folder}")
+        if os.path.isfile(self.ffmpeg_installation):
+            print(f"FFMPEG installed at: {self.ffmpeg_installation}")
 
     def create_video_with_ffmpeg(self, image_folder, output_video_path, fps):
+        # The files in the image_folder must be numbered sequentially as of ffmpeg version N-121335-g660983b7f3-20251007
+        print(os.path.join(image_folder, "generated_image_%6d.png"))
         ffmpeg_command = [
-            "C:\\Users\\PC\\Downloads\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffmpeg.exe",
+            self.ffmpeg_installation,
             "-framerate", str(fps),
-            "-i", os.path.join(image_folder, "generated_image_%20d.png"),  # Adjust pattern if needed
-            #"-c:v", "h264_nvenc",  # h264, threaded nvidia gpu
+            "-i", os.path.join(image_folder, "generated_image_%6d.png"),  # Adjust pattern if needed
+            "-c:v", "h264_nvenc",  # h264, threaded nvidia gpu
             #"-c:v", "hevc_nvenc",  # nvidia gpu, hevc
-            "-c:v", "libx264",  #std, h264, threaded cpu's
+            #"-c:v", "libx264",  #std, h264, threaded cpu's
             "-pix_fmt", "yuv420p",
-            os.path.join(image_folder, output_video_path)
+            output_video_path
         ]
         print(ffmpeg_command)
 
@@ -31,3 +48,9 @@ class Video:
             print(f"Video created successfully at: {output_video_path}")
         except subprocess.CalledProcessError as e:
             print(f"Error creating video with FFmpeg: {e}")
+
+    def parse_ffmpeg_version_data(self, data):
+        if data.returncode is 0:
+            print(data)
+        elif data.returncode is 1:
+            print(f"Error: ")

@@ -1,7 +1,6 @@
 datetime
-os
+numpy==2.3.4
+opencv-contrib-python
+opencv-python
+python-dotenv
 Pillow>=11.3.0
-random
-subprocess
-sqlite3
-turtle
