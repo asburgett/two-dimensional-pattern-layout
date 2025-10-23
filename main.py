@@ -1,3 +1,4 @@
+from src.classes.utils.compute import Compute
 from src.classes.utils.graphic import Graphic
 from src.classes.utils.pattern import Pattern
 from src.classes.utils.triangle import Triangle
@@ -14,16 +15,35 @@ debug = False
 
 # simple example pattern, parameters are segment dimensions of a triangle
 triangle_segment_data = (6.5, 6.5, 10.5)
-triangle_segment_data = {
+triangle_segment_data = ({
     'name': 'a-b', 'length': 6.5
 },{
     'name': 'b-c', 'length': 6.5
 },{
     'name': 'c-a', 'length': 10.5
-}
+})
+
+'''
+triangle_segment_data = ({
+    'name': 'a-b', 'length': 6.5
+},{
+    'name': 'b-c', 'length': 6.5
+},{
+    'name': 'c-a', 'length': 10.5
+},{
+    'name': 'c-d', 'length': 6.5
+},{
+    'name': 'd-b', 'length': 10.5
+},{
+    'name': 'd-e', 'length': 6.5
+},{
+    'name': 'e-c', 'length': 10.5
+})
+'''
 
 # a triangle is made up of segments and segment lengths, (AB=6.5, BC=6.5, AC=10.5)
 # initialize a triangle
+compute = Compute()
 c = Config()
 g = Graphic()
 t = Triangle()
@@ -52,6 +72,12 @@ try:
     print(t.heights)
     t.calculate_inner_right_triangles()
     print(t.heights)
+
+    # TODO: how do I properly transform the xy location to apply the next triangle of bcd?
+    # If all triangles relate to one point (a: 0,0), orientation is maintained as long as the x axis as segment a-c
+    # is used to determine direction of the triangle?
+    result = t.rotate_point((7.5, 7.5), (5.25, 3.38), 90)
+    print(result)
 except Exception as e:
     print(e)
 

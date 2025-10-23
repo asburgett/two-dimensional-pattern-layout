@@ -158,3 +158,46 @@ class Triangle:
         print(f"Height of 3rd point from x-axis: {b}")
         print(f"Remainder: {self.segments[2]['length'] - b}")
         return b
+
+    def rotate_point(self, origin, point, angle_degrees):
+        """
+        Rotates a point counterclockwise by a given angle around a given origin.
+        The angle should be given in radians.
+        """
+        ox, oy = origin
+        px, py = point
+        angle_radians = math.radians(angle_degrees)
+
+        # Translate point to origin
+        translated_x = px - ox
+        translated_y = py - oy
+
+        # Rotate translated point
+        rotated_x = translated_x * math.cos(angle_radians) - translated_y * math.sin(angle_radians)
+        rotated_y = translated_x * math.sin(angle_radians) + translated_y * math.cos(angle_radians)
+
+        # Translate rotated point back to original coordinate system
+        qx = rotated_x + ox
+        qy = rotated_y + oy
+
+        return qx, qy
+
+        # Example usage:
+        origin = (0, 0)  # Rotate around the origin
+        point = (1, 0)
+        angle_degrees = 90
+        angle_radians = math.radians(angle_degrees)
+
+        rotated_point = rotate_point(origin, point, angle_radians)
+        print(f"Original point: {point}")
+        print(f"Rotated point (around {origin} by {angle_degrees} degrees): {rotated_point}")
+
+        # Example with a different origin
+        origin_2 = (2, 2)
+        point_2 = (3, 4)
+        angle_degrees_2 = 45
+        angle_radians_2 = math.radians(angle_degrees_2)
+
+        rotated_point_2 = rotate_point(origin_2, point_2, angle_radians_2)
+        print(f"\nOriginal point: {point_2}")
+        print(f"Rotated point (around {origin_2} by {angle_degrees_2} degrees): {rotated_point_2}")
