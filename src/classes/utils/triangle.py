@@ -3,7 +3,9 @@ import math
 import turtle
 
 '''
-A triangle is made up of distance measurements
+A triangle is made up of points, segments and arcs, points have a location (x,y), segments have length, arcs have an angle
+A triangle also has area
+A segment has a median
 '''
 
 class Triangle:
@@ -14,6 +16,7 @@ class Triangle:
         self.area = []
         self.radians = []
         self.segments = []
+        self.pattern_labels = '' # abc, abd, abe, abf, ...
         '''
         self.segments = {
             'a-b': {
@@ -158,6 +161,11 @@ class Triangle:
         print(f"Height of 3rd point from x-axis: {b}")
         print(f"Remainder: {self.segments[2]['length'] - b}")
         return b
+
+    def calculate_vertex_locations(self):
+        # TODO: set the xy location data for the points of the triangle once all calculations have been made
+        # this correlates with the goto statements in the turtle graphics code in graphic.py
+        print(f"No calculations performed")
 
     def rotate_point(self, origin, point, angle_degrees):
         """

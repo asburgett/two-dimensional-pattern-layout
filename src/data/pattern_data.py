@@ -73,3 +73,69 @@ front_timing_cover_pattern = (
 
     {'segment': 'a-q', 'length': 20 + (1 / 8)}
 )
+front_timing_cover_pattern = (
+    {
+        'triangles': {
+            'abc': {
+                'segments': {
+                        'a-b': 9,
+                        'a-c': 7 + (17/32),
+                        'b-c': 8 + (1/16)
+                    },
+                'angles':
+                    {
+                        'a-b': 0,
+                        'b-c': 0,
+                        'a-c': 0
+                    },
+                'points':
+                    {
+                        'a': (0,0),
+                        'b': (9,0),
+                        'c': (100,100) #calculated
+                }
+            }
+        }
+    }
+)
+
+oil_filter_gasket_pattern = ({
+    'triangles': {
+        'abc': {
+            'area': 0,
+            'segments': {
+                'a-b': 1 + (3/4),
+                'a-c': 4 + (9/16),
+                'b-c': 3 + (15/16)
+            },
+            'angles': {
+                'a-b': 0,
+                'a-c': 0,
+                'b-c': 0
+            },
+            'points': {
+                'a': (0,0),
+                'b': (9,0),
+                'c': (100,100) #calculated
+            }
+        },
+        'abd': {
+            'area': 0,
+            'segments': {
+                'a-b': 1 + (3/4),
+                'a-d': 1 + (3/8),
+                'b-d': 2 + (3/8)
+            },
+            'angles': {
+                'a-b': 0,
+                'a-c': 0,
+                'b-c': 0
+            },
+            'points': {
+                'a': (0,0),
+                'b': (9,0), # largest segment,0
+                'd': (-0,-0)
+            }
+        }
+    }
+})

@@ -17,9 +17,11 @@ h-f
 '''
 
 class Pattern:
+    '''
+    A pattern is made up of triangles
+    '''
     def __init__(self):
         self.triangles = []
-        self.vertices = []
 
     def add_triangle(self, triangle_data):
         # {'a-b': 6.5, 'b-c': 6.5, 'c-a': 10.5}
